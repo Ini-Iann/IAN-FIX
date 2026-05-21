@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio Responsif - Uruka</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+   <div class="profile-container">
+        
+        <div class="ig-profile-header">
+            <div class="ig-avatar-container">
+                <div class="story-ring">
+                    <img src="FT PROFIL/Img 1.jpeg" alt="Ian" class="ig-avatar">
+                </div>
+            </div>
+            
+            <div class="ig-profile-info">
+                <div class="ig-username-row">
+                    <h2 class="ig-username">Ini_Iannn</h2>
+                    <i class="fas fa-certificate ig-verified-icon" title="Verified"></i>
+                    <i class="fas fa-ellipsis-h ig-menu-icon"></i>
+                </div>
+                
+                <div class="ig-stats-row">
+                    <div class="stat-item"><strong>9</strong> posts</div>
+                    <div class="stat-item"><strong>1,420</strong> followers</div>
+                    <div class="stat-item"><strong>380</strong> following</div>
+                </div>
+
+                <div class="ig-bio-row">
+                    <div class="ig-full-name">I'm Iann</div>
+                    <p class="ig-bio-text">
+                        💆‍♂️ Full-stack sleep <br>
+                        ✨ Crafting beautiful & functional dream.<br>
+                        📍 Based in Central Java
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    <div class="ig-photo-grid">
+        <div class="grid-item"><img src="FT INC PWT/INC 1.JPG" alt="P1"></div>
+        <div class="grid-item"><img src="FT INC PWT/INC 2.JPG" alt="P2"></div>
+        <div class="grid-item"><img src="FT INC PWT/INC 3.JPG" alt="P3"></div>
+        <div class="grid-item"><img src="FT INC SRAGI/INC 1.jpg" alt="P4"></div>
+        <div class="grid-item"><img src="FT INC SRAGI/INC 2.jpg" alt="P5"></div>
+        <div class="grid-item"><img src="FT INC SRAGI/INC 3.jpg" alt="P6"></div>
+        <div class="grid-item"><img src="FT RANDOM/KECIL.jpeg" alt="P7"></div>
+        <div class="grid-item"><img src="FT RANDOM/MBULL.jpeg" alt="P8"></div>
+        <div class="grid-item"><img src="FT RANDOM/YB.jpeg" alt="P9"></div>
+    </div>
+
+    <div class="status-wrapper">
+        <div class="status-badge">
+            <span class="status-dot"></span>
+            Orang Lama Orang Baru
+        </div>
+    </div>
+
+    <button class="hire-btn">Orang Gila</button>
+
+    <div class="social-links">
+        <a href="https://www.instagram.com/ysf.zi_?igsh=ODF1MnQyZjgzNmRu" target="_blank" rel="noopener noreferrer" class="social-icon">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.tiktok.com/@ian.zi1?_r=1&_t=ZS-96XrbJAmaCG" target="_blank" rel="noopener noreferrer" class="social-icon">
+            <i class="fab fa-tiktok"></i>
+        </a>
+        <a href="https://wa.me/6282223098159" target="_blank" rel="noopener noreferrer" class="social-icon">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+</div> ```
+
+    <div class="amongus-container">
+        <div class="chat-bubble">Sayaaa Akannn Lawannnnn!!!!!!!!!</div>
+        <div class="amongus-bounce">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbms1M290Mjd5Znd6YWw0dnN5bnR3N3RxYjE2dHBrbXg0NXF3bWZ0eiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/v6aO5BJV9bxUk/giphy.gif" alt="Among Us Berjalan">
+        </div>
+    </div>
+
+    <div class="bottom-dock">
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" placeholder="Cari..." class="search-input">
+        </div>
+        <div class="divider"></div>
+        <nav class="bottom-nav">
+            <a href="#" class="nav-item active"><i class="fas fa-layer-group"></i></a>
+            <a href="#" class="nav-item"><i class="fas fa-briefcase"></i></a>
+            <a href="#" class="nav-item"><i class="fas fa-home"></i></a>
+            <a href="#" class="nav-item"><i class="fas fa-file-alt"></i></a>
+            <a href="#" class="nav-item"><i class="fas fa-envelope"></i></a>
+        </nav>
+        <div class="divider"></div>
+        <div class="music-player">
+            <audio id="audio-track" src="MUSIK/The 1975 - About You.mp3"></audio>
+            <div class="player-content">
+                <img src="MUSIK/ABOUT YOU.jpg" alt="Cover" class="track-cover" id="track-cover">
+                <div class="track-info">
+                    <div class="track-title">About You</div>
+                    <div class="progress-container" id="progress-container">
+                        <div class="progress-bar" id="progress-bar"></div>
+                    </div>
+                </div>
+                <button class="play-btn" id="play-btn">
+                    <i class="fas fa-play" id="play-icon"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    const audio = document.getElementById('audio-track');
+    const playBtn = document.getElementById('play-btn');
+    const playIcon = document.getElementById('play-icon');
+    const progressBar = document.getElementById('progress-bar');
+    const progressContainer = document.getElementById('progress-container');
+    const trackCover = document.getElementById('track-cover');
+
+    // Fungsi utama Play / Pause dengan penanganan Error
+    playBtn.addEventListener('click', () => {
+        if (audio.paused) {
+            // Memulai putar musik
+            audio.play()
+                .then(() => {
+                    // Jika berhasil diputar
+                    playIcon.classList.remove('fa-play');
+                    playIcon.classList.add('fa-pause');
+                    trackCover.classList.add('rotating');
+                })
+                .catch((error) => {
+                    // Jika gagal (Misal: diblokir browser atau link rusak)
+                    console.error("Gagal memutar audio:", error);
+                    alert("Akses audio diblokir browser atau file tidak ditemukan! Coba klik di mana saja pada layar dulu baru tekan Play, atau gunakan file mp3 lokal.");
+                });
+        } else {
+            // Menghentikan musik
+            audio.pause();
+            playIcon.classList.remove('fa-pause');
+            playIcon.classList.add('fa-play');
+            trackCover.classList.remove('rotating');
+        }
+    });
+
+    // Update Progress Bar Berjalan
+    audio.addEventListener('timeupdate', () => {
+        if (audio.duration) {
+            const progressPercent = (audio.currentTime / audio.duration) * 100;
+            progressBar.style.width = `${progressPercent}%`;
+        }
+    });
+
+    // Klik pada Progress Bar untuk Lompat Durasi
+    progressContainer.addEventListener('click', (e) => {
+        const width = progressContainer.clientWidth;
+        const clickX = e.offsetX;
+        if (audio.duration) {
+            audio.currentTime = (clickX / width) * audio.duration;
+        }
+    });
+
+    // Reset tombol saat lagu selesai
+    audio.addEventListener('ended', () => {
+        playIcon.classList.remove('fa-pause');
+        playIcon.classList.add('fa-play');
+        trackCover.classList.remove('rotating');
+        progressBar.style.width = '0%';
+    });
+</script>
+</body>
+</html>

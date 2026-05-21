@@ -1,0 +1,580 @@
+/* --- RESET & STYLES GLOBAL --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: #0b0f19;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* --- CONTAINER UTAMA --- */
+.profile-container {
+    text-align: center;
+    max-width: 450px;
+    width: 100%;
+    padding-bottom: 150px; /* Ruang ekstra untuk dock yang semakin lengkap */
+}
+
+/* --- INSTAGRAM STYLE HEADER LAYOUT --- */
+.ig-profile-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 32px;
+    max-width: 500px;
+    margin: 0 auto 32px auto;
+    text-align: left; /* Mengubah rata tengah menjadi rata kiri khas IG */
+    padding: 0 16px;
+}
+
+/* 1. Sisi Kiri: Lingkaran Foto & Efek Gradasi Instagram Story */
+.ig-avatar-container {
+    flex-shrink: 0;
+}
+
+.story-ring {
+    background: linear-gradient(45deg, #fccc63, #fbad50, #cd486b, #4c68d7);
+    padding: 3px; /* Jarak ketebalan garis gradasi */
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.ig-avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #0b0f19; /* Menjaga batas putih/gelap pemisah foto dengan garis gradasi */
+    display: block;
+}
+
+/* 2. Sisi Kanan: Kumpulan Informasi */
+.ig-profile-info {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Baris Username */
+.ig-username-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ig-username {
+    font-size: 1.35rem;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    color: #ffffff;
+}
+
+.ig-verified-icon {
+    color: #3897f0; /* Biru centang verified asli Instagram */
+    font-size: 1.1rem;
+}
+
+/* Baris Angka Statistik */
+.ig-stats-row {
+    display: flex;
+    gap: 24px;
+}
+
+.stat-item {
+    font-size: 0.95rem;
+    color: #f5f5f5;
+}
+
+.stat-item strong {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+/* Baris Nama Lengkap & Bio */
+.ig-bio-row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.ig-full-name {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #ffffff;
+}
+
+.ig-bio-text {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #9aa4b7;
+}
+
+/* --- OPTIMASI LAYOUT LAYAR PONSEL (RESPONSIF) --- */
+@media (max-width: 480px) {
+    .ig-profile-header {
+        gap: 20px;
+    }
+    
+    .ig-avatar {
+        width: 75px;
+        height: 75px;
+    }
+    
+    .ig-username {
+        font-size: 1.15rem;
+    }
+    
+    .ig-stats-row {
+        gap: 16px;
+    }
+    
+    .stat-item {
+        font-size: 0.85rem;
+    }
+}
+
+.status-wrapper {
+    margin-top: 60px; /* Diperbesar dari 32px menjadi 60px agar jaraknya terasa agak jauh dan renggang */
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    gap: 8px;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    background-color: #10b981;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #10b981;
+}
+
+.hire-btn {
+   display: block;
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto 24px auto;
+    background-color: #1e2230;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 14px;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.hire-btn:hover {
+    background-color: #2a3044;
+    transform: translateY(-2px);
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 40px; /* Sedikit ditambah agar seimbang sebelum mentok ke area dock bawah */
+}
+
+.social-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-3px);
+}
+
+/* --- DOCK UTAMA BARISAN BAWAH --- */
+.bottom-dock {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(30, 34, 48, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10px 18px;
+    border-radius: 40px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: max-content;
+    max-width: 95%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
+
+/* BAGIAN 1: Kolom Penelusur (Kiri) */
+.search-container {
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 6px 12px;
+    width: 120px; /* Lebar default kolom cari */
+    transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.search-container:focus-within {
+    width: 150px; /* Melebar sedikit saat diklik */
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.search-icon {
+    color: #9aa4b7;
+    font-size: 0.85rem;
+    margin-right: 8px;
+}
+
+.search-input {
+    background: none;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    font-size: 0.85rem;
+    width: 100%;
+}
+
+.search-input::placeholder {
+    color: rgba(154, 164, 183, 0.6);
+}
+
+/* Pembatas Vertikal */
+.divider {
+    width: 1px;
+    height: 24px;
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* BAGIAN 2: Navigasi Menu (Tengah) */
+.bottom-nav {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-item {
+    color: #9aa4b7;
+    font-size: 1.15rem;
+    transition: color 0.3s ease;
+    text-decoration: none;
+}
+
+.nav-item:hover, .nav-item.active {
+    color: #ffffff;
+}
+
+/* BAGIAN 3: Pemutar Musik Mini (Kanan) */
+.music-player {
+    display: flex;
+    align-items: center;
+}
+
+.player-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.track-cover {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.rotating {
+    animation: rotateCover 4s linear infinite;
+}
+
+@keyframes rotateCover {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.track-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 80px;
+}
+
+.track-title {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.progress-container {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    height: 3px;
+    width: 100%;
+    margin-top: 3px;
+    cursor: pointer;
+}
+
+.progress-bar {
+    background-color: #3b82f6;
+    border-radius: 2px;
+    height: 100%;
+    width: 0%;
+}
+
+.play-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    border: none;
+    color: #0b0f19;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.play-btn:hover {
+    transform: scale(1.08);
+}
+
+/* ================================================================== */
+/* PERBAIKAN ANIMASI BALON CHAT AGAR TIDAK IKUT TERBALIK / ROTASI     */
+/* ================================================================== */
+
+/* --- CONTAINER UTAMA AMONG US --- */
+.amongus-container {
+    position: fixed;
+    bottom: 92px; 
+    left: 0;
+    width: 45px; 
+    height: auto;
+    z-index: 5;
+    animation: amongUsPatrol 20s linear infinite;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* --- GELEMBUNG CHAT AMONG US --- */
+.chat-bubble {
+    position: relative;
+    background: #e11d48; 
+    color: #ffffff;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(225, 29, 72, 0.3);
+    
+    /* Tambahkan animasi 'fixBubble' bersamaan dengan animasi mengapung */
+    animation: bubbleFloat 1s ease-in-out infinite alternate, fixBubble 20s linear infinite;
+}
+
+/* Segitiga Lancip di Bawah Gelembung Chat */
+.chat-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px 5px 0;
+    border-style: solid;
+    border-color: #e11d48 transparent;
+    display: block;
+    width: 0;
+}
+
+/* Wadah Sekunder: Efek Jinjit */
+.amongus-bounce {
+    width: 100%;
+    animation: amongUsHop 0.35s ease-in-out infinite alternate;
+}
+
+.amongus-bounce img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+/* ================================================================== */
+/* KEYFRAMES PERGERAKAN (LOGIKA COUNTER ROTASI)                      */
+/* ================================================================== */
+
+/* 1. Jalur Patroli Karakter Utama (Crewmate) */
+@keyframes amongUsPatrol {
+    0%   { left: 5%;  bottom: 92px; transform: scaleX(1); }  /* Hadap Kanan */
+    40%  { left: 80%; bottom: 92px; transform: scaleX(1); }
+    45%  { left: 88%; bottom: 50px; transform: scaleX(1); }
+    48%  { left: 88%; bottom: 50px; transform: scaleX(-1); } /* Balik badan ke Kiri */
+    53%  { left: 80%; bottom: 92px; transform: scaleX(-1); }
+    93%  { left: 5%;  bottom: 92px; transform: scaleX(-1); }
+    97%  { left: 5%;  bottom: 92px; transform: scaleX(1); }  /* Balik badan ke Kanan */
+    100% { left: 5%;  bottom: 92px; transform: scaleX(1); }
+}
+
+/* 2. Animasi Penetral Balon Chat (Meng-counter Balik Badan Karakter) */
+/* Waktunya (20s) dan persentasenya wajib sama persis dengan amongUsPatrol */
+@keyframes fixBubble {
+    0%   { transform: scaleX(1); }
+    40%  { transform: scaleX(1); }
+    45%  { transform: scaleX(1); }
+    48%  { transform: scaleX(-1); } /* Saat container terbalik (-1), balon dibalik lagi (-1) jadi Normal (+1) */
+    53%  { transform: scaleX(-1); }
+    93%  { transform: scaleX(-1); }
+    97%  { transform: scaleX(1); }
+    100% { transform: scaleX(1); }
+}
+
+/* 3. Gerakan Hentakan Kaki Mendatar */
+@keyframes amongUsHop {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-6px); }
+}
+
+/* 4. Efek Mengapung Balon Chat */
+@keyframes bubbleFloat {
+    0% { top: 0px; }
+    100% { top: -3px; } /* Mengubah translateY menjadi top agar tidak tabrakan dengan scaleX */
+}
+
+/* Responsivitas Responsif Layar Kecil (Mobile Optimization) */
+@media (max-width: 480px) {
+    .bottom-dock {
+        gap: 10px;
+        padding: 8px 12px;
+    }
+    .search-container {
+        width: 40px; /* Jadi ikon saja di HP agar tidak sempit */
+        padding: 6px;
+        justify-content: center;
+    }
+    .search-container:focus-within {
+        width: 80px;
+    }
+    .search-input {
+        display: none; /* Sembunyikan teks di layar super kecil */
+    }
+    .search-container:focus-within .search-input {
+        display: block;
+    }
+    .track-info {
+        display: none; 
+    }
+}
+
+/* --- ICON TITIK TIGA DI HEADER --- */
+.ig-menu-icon {
+    color: #ffffff;
+    font-size: 1.1rem;
+    margin-left: auto; /* Memaksa bergeser paling kanan di baris username */
+    cursor: pointer;
+    padding: 4px;
+    transition: opacity 0.2s;
+}
+
+.ig-menu-icon:hover {
+    opacity: 0.7;
+}
+
+/* --- TAB SEPARATOR POSTS --- */
+.ig-tabs-divider {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 16px;
+    display: flex;
+    justify-content: center;
+}
+
+.tab-item {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #ffffff;
+    padding: 12px 0;
+    border-top: 1px solid #ffffff; /* Garis aktif di atas tab khas IG */
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+/* --- GRID FOTO 3X3 RESPONSIVE --- */
+.ig-photo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Membagi rata menjadi 3 kolom mendatar */
+    gap: 3px; /* Jarak antar sela foto khas grid IG */
+    margin-top: 4px;
+    width: 100%;
+}
+
+.grid-item {
+    position: relative;
+    width: 100%;
+    /* Trik rasio 1:1 agar kotak selalu berbentuk persegi sempurna */
+    aspect-ratio: 1 / 1; 
+    background-color: #161b26;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.grid-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Memotong foto agar memenuhi kotak persegi tanpa gepeng */
+    transition: transform 0.3s ease;
+}
+
+/* Efek zoom tipis saat foto disorot mouse */
+.grid-item:hover img {
+    transform: scale(1.05);
+}
+
+/* Penyesuaian padding container profil agar muat saat di-scroll */
+.profile-container {
+    padding-bottom: 170px !important; 
+}
