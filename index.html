@@ -318,6 +318,59 @@
             likeBtn.classList.toggle('far');
             likeBtn.style.color = likeBtn.classList.contains('fas') ? '#e11d48' : '#ffffff';
         });
+
+       // =======================================================
+        // LOGIKA BARU: KONTROL PERGERAKAN KARAKTER LEWAT KLIK    
+        // =======================================================
+        const crewmate = document.getElementById('interactive-crewmate');
+        const bubble = document.querySelector('.chat-bubble');
+
+        // Set posisi awal karakter biar pas berdiri di atas dock sebelah kiri luar
+        let currentX = 50; 
+        let currentY = window.innerHeight - 140;
+
+        crewmate.style.left = `${currentX}px`;
+        crewmate.style.top = `${currentY}px`;
+
+        // Deteksi klik di seluruh area halaman web
+        document.addEventListener('click', (e) => {
+            // Abaikan klik jika user sedang menekan tombol, menu dock, link, atau modal foto
+            if (
+                e.target.closest('.bottom-dock') || 
+                e.target.closest('.ig-photo-grid') || 
+                e.target.closest('.hire-btn') || 
+                e.target.closest('.social-links') ||
+                e.target.closest('.ig-modal-card') ||
+                e.target.closest('.popup-card')
+            ) {
+                return; 
+            }
+
+            // 1. Ambil koordinat titik yang diklik oleh user
+            // Dikurangi setengah ukuran karakter (22px) agar karakter pas berhenti di tengah klik
+            const targetX = e.clientX - 22; 
+            const targetY = e.clientY - 40; 
+
+            // 2. Logika membalikkan badan karakter (ScaleX)
+            if (targetX > currentX) {
+                // Jika lokasi klik berada di sebelah kanan karakter -> Hadap Kanan
+                crewmate.style.transform = 'scaleX(1)';
+                bubble.style.transform = 'scaleX(1)'; // Pastikan balon chat tetap normal
+            } else {
+                // Jika lokasi klik berada di sebelah kiri karakter -> Hadap Kiri (Cermin)
+                crewmate.style.transform = 'scaleX(-1)';
+                bubble.style.transform = 'scaleX(-1)'; // Counter tulisan balon chat agar tidak kebalik
+            }
+
+            // 3. Gerakkan karakter ke koordinat baru tersebut
+            crewmate.style.left = `${targetX}px`;
+            crewmate.style.top = `${targetY}px`;
+
+            // Update posisi koordinat saat ini
+            currentX = targetX;
+            currentY = targetY;
+        });
+       
     </script>
 </body>
 
