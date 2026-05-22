@@ -55,6 +55,38 @@
         <div class="grid-item"><img src="FT RANDOM/YB.jpeg" alt="P9"></div>
     </div>
 
+       <div class="ig-modal-overlay" id="photo-modal">
+        <div class="ig-modal-card">
+            <button class="ig-modal-close" id="close-photo-btn">&times;</button>
+            
+            <div class="ig-modal-content">
+                <div class="ig-modal-left">
+                    <img src="" alt="Preview Post" id="modal-main-img">
+                </div>
+                <div class="ig-modal-right">
+                    <div class="ig-modal-header">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80" alt="Uruka" class="modal-avatar">
+                        <div>
+                            <div class="modal-username">uruka_dev <i class="fas fa-certificate ig-verified-icon"></i></div>
+                            <div class="modal-location">Semarang, Indonesia</div>
+                        </div>
+                    </div>
+                    <div class="ig-modal-comments">
+                        <p><strong>uruka_dev</strong> ✨ Project showcase! Membangun antarmuka modern yang responsif dan interaktif. Gimana menurut kalian? #webdev #portfolio</p>
+                    </div>
+                    <div class="ig-modal-actions">
+                        <div class="action-icons">
+                            <i class="far fa-heart" id="modal-like-btn"></i>
+                            <i class="far fa-comment"></i>
+                            <i class="far fa-paper-plane"></i>
+                        </div>
+                        <div class="likes-count">Liked by <strong>you</strong> and <strong>128 others</strong></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="status-wrapper">
         <div class="status-badge">
             <span class="status-dot"></span>
@@ -202,6 +234,44 @@
         hirePopup.addEventListener('click', (e) => {
             if (e.target === hirePopup) {
                 hirePopup.classList.remove('popup-active');
+            }
+        });
+
+        // =======================================================
+        // LOGIKA BARU: BUKA FEED FOTO ALA INSTAGRAM              
+        // =======================================================
+        const gridItems = document.querySelectorAll('.grid-item img');
+        const photoModal = document.getElementById('photo-modal');
+        const modalMainImg = document.getElementById('modal-main-img');
+        const closePhotoBtn = document.getElementById('close-photo-btn');
+        const likeBtn = document.getElementById('modal-like-btn');
+
+        // Deteksi klik pada setiap foto di dalam grid
+        gridItems.forEach(img => {
+            img.parentElement.addEventListener('click', () => {
+                modalMainImg.src = img.src; // Ambil sumber gambar yang diklik
+                photoModal.classList.add('modal-active');
+                document.body.style.overflow = 'hidden'; // Kunci scroll layar utama
+            });
+        });
+
+        // Tutup modal foto
+        function closeModal() {
+            photoModal.classList.remove('modal-active');
+            document.body.style.overflow = 'auto'; // Aktifkan scroll kembali
+        }
+
+        closePhotoBtn.addEventListener('click', closeModal);
+        photoModal.addEventListener('click', (e) => { if (e.target === photoModal) closeModal(); });
+
+        // Fitur Like Iseng-isengan
+        likeBtn.addEventListener('click', () => {
+            likeBtn.classList.toggle('fas');
+            likeBtn.classList.toggle('far');
+            if(likeBtn.classList.contains('fas')) {
+                likeBtn.style.color = '#e11d48';
+            } else {
+                likeBtn.style.color = '#ffffff';
             }
         });
     </script>
