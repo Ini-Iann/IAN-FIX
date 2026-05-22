@@ -874,9 +874,21 @@ body {
     .ig-modal-right {
         border-left: none;
     }
-    .ig-modal-comments {
-        max-height: 80px; /* Batasi komentar agar tidak terlalu panjang ke bawah */
-    }
+   /* Tengah: Deskripsi / Keterangan Gambar */
+.ig-modal-comments {
+    flex: 1;
+    padding: 14px;
+    font-size: 0.85rem;
+    line-height: 1.5; /* Ditinggikan sedikit agar lebih nyaman dibaca */
+    overflow-y: auto;
+    color: #f5f5f5;
+    text-align: left; /* Menjamin tulisan rata kiri rapi ala Instagram */
+}
+
+.ig-modal-comments p {
+    margin: 0;
+    word-break: break-word; /* Mencegah tagar panjang merusak layout ke samping */
+}
     .ig-modal-close {
         top: 10px;
         right: 14px;
