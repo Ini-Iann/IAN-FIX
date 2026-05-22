@@ -578,3 +578,122 @@ body {
 .profile-container {
     padding-bottom: 170px !important; 
 }
+
+/* ================================================================== */
+/* POP-UP MODAL STYLING (LUCU & INTERAKTIF)                           */
+/* ================================================================== */
+
+/* Latar belakang hitam transparan yang menutupi seluruh layar */
+.custom-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(11, 15, 25, 0.85); /* Nuansa gelap senada */
+    backdrop-filter: blur(8px); /* Efek buram estetik di belakang pop-up */
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100; /* Berada di atas dock dan komponen lain */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+/* Kotak Kartu Pop-up Utama */
+.popup-card {
+    background-color: #161b26;
+    border: 2px solid rgba(225, 29, 72, 0.4); /* Garis tepi merah khas emergency */
+    border-radius: 24px;
+    padding: 32px 24px;
+    max-width: 360px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    transform: scale(0.7); /* Ukuran awal mengecil untuk animasi memantul */
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); /* Efek memantul bouncy */
+}
+
+/* Trigger Class untuk Menampilkan (Dipicu oleh JavaScript) */
+.custom-popup-overlay.popup-active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.custom-popup-overlay.popup-active .popup-card {
+    transform: scale(1); /* Kembali ke ukuran asli saat aktif */
+}
+
+/* Tombol Tutup (Silang) di Sudut Atas */
+.popup-close-btn {
+    position: absolute;
+    top: 14px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: #9aa4b7;
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.popup-close-btn:hover {
+    color: #ffffff;
+}
+
+/* Area Karakter Bergerak di Dalam Pop-up */
+.popup-avatar-animation {
+    width: 70px;
+    margin: 0 auto 16px auto;
+}
+
+.popup-avatar-animation img {
+    width: 100%;
+    height: auto;
+}
+
+/* Komponen Teks Pop-up */
+.popup-title {
+    font-size: 1.4rem;
+    color: #e11d48; /* Warna merah emergency meeting */
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.popup-text {
+    font-size: 0.9rem;
+    color: #9aa4b7;
+    line-height: 1.5;
+    margin-bottom: 24px;
+}
+
+.popup-text strong {
+    color: #ffffff;
+}
+
+/* Tombol Aksi Utama Kirim Email */
+.popup-action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: #e11d48;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: 14px;
+    width: 100%;
+    box-shadow: 0 4px 14px rgba(225, 29, 72, 0.4);
+    transition: all 0.2s ease;
+}
+
+.popup-action-btn:hover {
+    background-color: #be123c;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(225, 29, 72, 0.6);
+}
