@@ -116,63 +116,95 @@
         </div>
     </div>
 
-    <script>
-    const audio = document.getElementById('audio-track');
-    const playBtn = document.getElementById('play-btn');
-    const playIcon = document.getElementById('play-icon');
-    const progressBar = document.getElementById('progress-bar');
-    const progressContainer = document.getElementById('progress-container');
-    const trackCover = document.getElementById('track-cover');
+ // --- LOGIKA MUSIK ---
+        const audio = document.getElementById('audio-track');
+        const playBtn = document.getElementById('play-btn');
+        const playIcon = document.getElementById('play-icon');
+        const progressBar = document.getElementById('progress-bar');
+        const progressContainer = document.getElementById('progress-container');
+        const trackCover = document.getElementById('track-cover');
 
-    // Fungsi utama Play / Pause dengan penanganan Error
-    playBtn.addEventListener('click', () => {
-        if (audio.paused) {
-            // Memulai putar musik
-            audio.play()
-                .then(() => {
-                    // Jika berhasil diputar
-                    playIcon.classList.remove('fa-play');
-                    playIcon.classList.add('fa-pause');
-                    trackCover.classList.add('rotating');
-                })
-                .catch((error) => {
-                    // Jika gagal (Misal: diblokir browser atau link rusak)
-                    console.error("Gagal memutar audio:", error);
-                    alert("Akses audio diblokir browser atau file tidak ditemukan! Coba klik di mana saja pada layar dulu baru tekan Play, atau gunakan file mp3 lokal.");
-                });
-        } else {
-            // Menghentikan musik
-            audio.pause();
+        playBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play()
+                    .then(() => {
+                        playIcon.classList.remove('fa-play');
+                        playIcon.classList.add('fa-pause');
+                        trackCover.classList.add('rotating');
+                    })
+                    .catch((error) => console.error("Gagal memutar audio:", error));
+            } else {
+                audio.pause();
+                playIcon.classList.remove('fa-pause');
+                playIcon.classList.add('fa-play');
+                trackCover.classList.remove('rotating');
+            }
+        });
+
+        audio.addEventListener('timeupdate', () => {
+            if (audio.duration) {
+                const progressPercent = (audio.currentTime / audio.duration) * 100;
+                progressBar.style.width = `${progressPercent}%`;
+            }
+        });
+
+        progressContainer.addEventListener('click', (e) => {
+            const width = progressContainer.clientWidth;
+            const clickX = e.offsetX;
+            if (audio.duration) {
+                audio.currentTime = (clickX / width) * audio.duration;
+            }
+        });
+
+        audio.addEventListener('ended', () => {
             playIcon.classList.remove('fa-pause');
             playIcon.classList.add('fa-play');
             trackCover.classList.remove('rotating');
-        }
-    });
+            progressBar.style.width = '0%';
+        });
 
-    // Update Progress Bar Berjalan
-    audio.addEventListener('timeupdate', () => {
-        if (audio.duration) {
-            const progressPercent = (audio.currentTime / audio.duration) * 100;
-            progressBar.style.width = `${progressPercent}%`;
-        }
-    });
+        // --- LOGIKA BARU: POP-UP POPUP INTERAKTIF ---
+        const hireBtn = document.querySelector('.hire-btn');
+        const hirePopup = document.getElementById('hire-popup');
+        const closePopupBtn = document.getElementById('close-popup-btn');
 
-    // Klik pada Progress Bar untuk Lompat Durasi
-    progressContainer.addEventListener('click', (e) => {
-        const width = progressContainer.clientWidth;
-        const clickX = e.offsetX;
-        if (audio.duration) {
-            audio.currentTime = (clickX / width) * audio.duration;
-        }
-    });
+        // Buka Pop-up saat Tombol Hire Me Ditekan
+        hireBtn.addEventListener('click', () => {
+            hirePopup.classList.add('popup-active');
+        });
 
-    // Reset tombol saat lagu selesai
-    audio.addEventListener('ended', () => {
-        playIcon.classList.remove('fa-pause');
-        playIcon.classList.add('fa-play');
-        trackCover.classList.remove('rotating');
-        progressBar.style.width = '0%';
-    });
-</script>
+        // Tutup Pop-up saat Tombol Silang Ditekan
+        closePopupBtn.addEventListener('click', () => {
+            hirePopup.classList.remove('popup-active');
+        });
+
+        // Tutup Pop-up jika Pengunjung Mengklik Area Gelap di Luar Kotak
+        hirePopup.addEventListener('click', (e) => {
+            if (e.target === hirePopup) {
+                hirePopup.classList.remove('popup-active');
+            }
+        });
+    </script>
 </body>
+
+     <div class="custom-popup-overlay" id="hire-popup">
+        <div class="popup-card">
+            <button class="popup-close-btn" id="close-popup-btn">&times;</button>
+            
+            <div class="popup-avatar-animation">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbms1M290Mjd5Znd6YWw0dnN5bnR3N3RxYjE2dHBrbXg0NXF3bWZ0eiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/v6aO5BJV9bxUk/giphy.gif" alt="Among Us Dance">
+            </div>
+            
+            <h3 class="popup-title">Emergency Meeting! 🚨</h3>
+            <p class="popup-text">
+                "We scanned the area and found no Impostors. <br>
+                <strong>uruka_dev</strong> is confirmed 100% Innocent & Creative!"
+            </p>
+            
+            <a href="mailto:email_kamu@gmail.com?subject=Tawaran Kerja Kerjasama" class="popup-action-btn">
+                <i class="fas fa-paper-plane"></i> Let's Work Together!
+            </a>
+        </div>
+    </div>
+    
 </html>
