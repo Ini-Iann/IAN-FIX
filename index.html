@@ -168,7 +168,57 @@
     </div>
 
     
-    <script>
+   <script>
+        // --- DATA DESKRIPSI UNTUK SETIAP FOTO FEED (9 POSTINGAN) ---
+        const postData = [
+            {
+                location: "Semarang, Indonesia",
+                caption: "<strong>uruka_dev</strong> 💻 Akhirnya selesai juga! Membangun arsitektur backend e-commerce yang scalable menggunakan Node.js dan PostgreSQL. #backend #coding #webdev",
+                likes: "Liked by <strong>you</strong> and <strong>142 others</strong>"
+            },
+            {
+                location: "Wonosobo, Central Java",
+                caption: "<strong>uruka_dev</strong> ✨ Eksperimen UI/UX bertema Cyberpunk Dashboard. Fokus pada perpaduan warna neon gelap dan animasi micro-interactions. #uiux #design #figma",
+                likes: "Liked by <strong>septian_yusuf</strong> and <strong>98 others</strong>"
+            },
+            {
+                location: "GitHub Repository",
+                caption: "<strong>uruka_dev</strong> 🚀 Baru saja merilis library open-source untuk optimasi gambar otomatis di framework React. Cek link di bio! #reactjs #opensource #npm",
+                likes: "Liked by <strong>developer_world</strong> and <strong>210 others</strong>"
+            },
+            {
+                location: "My Workspace",
+                caption: "<strong>uruka_dev</strong> ☕ Setup ngoding minimalis malam ini ditemani musik lofi santai di dock bawah. Produktivitas meningkat 200%! #setup #programming #lofi",
+                likes: "Liked by <strong>you</strong> and <strong>85 others</strong>"
+            },
+            {
+                location: "Cloud Server",
+                caption: "<strong>uruka_dev</strong> ☁️ Berhasil migrasi infrastruktur aplikasi portofolio lama ke arsitektur Serverless. Loading speed jadi kencang banget! #aws #serverless #cloud",
+                likes: "Liked by <strong>tech_enthusiast</strong> and <strong>115 others</strong>"
+            },
+            {
+                location: "Semarang, Indonesia",
+                caption: "<strong>uruka_dev</strong> 📱 Slicing UI aplikasi mobile Android/iOS menggunakan Flutter. Desain responsif di semua ukuran layar ponsel. #flutter #mobiledev #apps",
+                likes: "Liked by <strong>you</strong> and <strong>134 others</strong>"
+            },
+            {
+                location: "Wonosobo, Central Java",
+                caption: "<strong>uruka_dev</strong> 🛡️ Mengamankan endpoint API dari serangan brute force menggunakan kombinasi Redis Rate Limiter dan JWT Auth. #cybersecurity #api #security",
+                likes: "Liked by <strong>hacker_news</strong> and <strong>190 others</strong>"
+            },
+            {
+                location: "Home Lab",
+                caption: "<strong>uruka_dev</strong> 🤖 Iseng-iseng bikin bot Discord otomatis yang bisa memutar musik lofi langsung ke voice channel. Seru juga! #discordbot #python #nodejs",
+                likes: "Liked by <strong>you</strong> and <strong>76 others</strong>"
+            },
+            {
+                location: "Semarang, Indonesia",
+                caption: "<strong>uruka_dev</strong> 🏁 Menutup tahun dengan menyelesaikan 9 proyek web modern. Terima kasih buat semua klien yang sudah berkolaborasi! #portfolio #freelancer #webdesign",
+                likes: "Liked by <strong>everyone</strong> and <strong>320 others</strong>"
+            }
+        ];
+
+        // --- LOGIKA PLAY/PAUSE MUSIK ---
         const audio = document.getElementById('audio-track');
         const playBtn = document.getElementById('play-btn');
         const playIcon = document.getElementById('play-icon');
@@ -208,71 +258,65 @@
             }
         });
 
-        audio.addEventListener('ended', () => {
-            playIcon.classList.remove('fa-pause');
-            playIcon.classList.add('fa-play');
-            trackCover.classList.remove('rotating');
-            progressBar.style.width = '0%';
-        });
-
-        // --- LOGIKA BARU: POP-UP POPUP INTERAKTIF ---
+        // --- LOGIKA POP-UP HIRE ME ---
         const hireBtn = document.querySelector('.hire-btn');
         const hirePopup = document.getElementById('hire-popup');
         const closePopupBtn = document.getElementById('close-popup-btn');
 
-        // Buka Pop-up saat Tombol Hire Me Ditekan
-        hireBtn.addEventListener('click', () => {
-            hirePopup.classList.add('popup-active');
-        });
+        hireBtn.addEventListener('click', () => hirePopup.classList.add('popup-active'));
+        closePopupBtn.addEventListener('click', () => hirePopup.classList.remove('popup-active'));
+        hirePopup.addEventListener('click', (e) => { if (e.target === hirePopup) hirePopup.classList.remove('popup-active'); });
 
-        // Tutup Pop-up saat Tombol Silang Ditekan
-        closePopupBtn.addEventListener('click', () => {
-            hirePopup.classList.remove('popup-active');
-        });
 
-        // Tutup Pop-up jika Pengunjung Mengklik Area Gelap di Luar Kotak
-        hirePopup.addEventListener('click', (e) => {
-            if (e.target === hirePopup) {
-                hirePopup.classList.remove('popup-active');
-            }
-        });
-
-       // =======================================================
-        // LOGIKA BARU: BUKA FEED FOTO ALA INSTAGRAM              
+        // =======================================================
+        // LOGIKA BUKA FEED FOTO DENGAN DATA BERBEDA-BEDA          
         // =======================================================
         const gridItems = document.querySelectorAll('.grid-item img');
         const photoModal = document.getElementById('photo-modal');
         const modalMainImg = document.getElementById('modal-main-img');
         const closePhotoBtn = document.getElementById('close-photo-btn');
         const likeBtn = document.getElementById('modal-like-btn');
+        
+        // Element target modal yang ingin kita ganti isinya secara dinamis
+        const modalLocation = document.querySelector('.modal-location');
+        const modalComments = document.querySelector('.ig-modal-comments p');
+        const likesCount = document.querySelector('.likes-count');
 
-        // Deteksi klik pada setiap foto di dalam grid
-        gridItems.forEach(img => {
+        // Deteksi klik foto lewat perulangan forEach dengan parameter indeks (index)
+        gridItems.forEach((img, index) => {
             img.parentElement.addEventListener('click', () => {
-                modalMainImg.src = img.src; // Ambil sumber gambar yang diklik
+                // 1. Pasang foto utama
+                modalMainImg.src = img.src; 
+                
+                // 2. Suntik data yang berbeda berdasarkan nomor index grid yang diklik
+                modalLocation.textContent = postData[index].location;
+                modalComments.innerHTML = postData[index].caption;
+                likesCount.innerHTML = postData[index].likes;
+
+                // 3. Reset status tombol like ke posisi belum ditekan (putih) setiap ganti foto
+                likeBtn.className = "far fa-heart";
+                likeBtn.style.color = "#ffffff";
+
+                // 4. Buka Jendela Modal
                 photoModal.classList.add('modal-active');
-                document.body.style.overflow = 'hidden'; // Kunci scroll layar utama
+                document.body.style.overflow = 'hidden'; 
             });
         });
 
-        // Tutup modal foto
+        // Fungsi Tutup Modal
         function closeModal() {
             photoModal.classList.remove('modal-active');
-            document.body.style.overflow = 'auto'; // Aktifkan scroll kembali
+            document.body.style.overflow = 'auto'; 
         }
 
         closePhotoBtn.addEventListener('click', closeModal);
         photoModal.addEventListener('click', (e) => { if (e.target === photoModal) closeModal(); });
 
-        // Fitur Like Iseng-isengan
+        // Tombol Like Interaktif
         likeBtn.addEventListener('click', () => {
             likeBtn.classList.toggle('fas');
             likeBtn.classList.toggle('far');
-            if(likeBtn.classList.contains('fas')) {
-                likeBtn.style.color = '#e11d48';
-            } else {
-                likeBtn.style.color = '#ffffff';
-            }
+            likeBtn.style.color = likeBtn.classList.contains('fas') ? '#e11d48' : '#ffffff';
         });
     </script>
 </body>
